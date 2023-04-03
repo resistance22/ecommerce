@@ -1,0 +1,6 @@
+{
+  "files.autoSave": "onFocusChange",
+  "editor.formatOnSave": true,
+  "eslint.run": "onType",
+  "eslint.codeActionsOnSave.rules": null
+}
