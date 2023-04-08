@@ -10,5 +10,7 @@ export const reqLogger = () => expressWinston.logger({
   format: winston.format.combine(
     winston.format.colorize(),
     winston.format.json()
-  )
+  ),
+  meta: false,
+  colorize: true
 })
