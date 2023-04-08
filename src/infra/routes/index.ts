@@ -3,6 +3,8 @@ import { UserRegisterUseCase } from '@usecases/User/register.usecase'
 import { makeRegisterController } from "../controllers/User/register.controller"
 import { TypeORMUserRepo } from "@repos/TypeORMUserRepo"
 import { getDataSource } from '@infra/DB'
+import { UserEmailServices } from '@infra/services/UserEmailServices'
+import { UserUtils } from '@infra/utils/userUtils'
 import { DataSource } from 'typeorm'
 
 export class UserRoutes {
@@ -23,7 +25,9 @@ export class UserRoutes {
     if (!this.initialized) {
       throw Error("The DataSrource is not initialized!")
     }
-    const userRegisterUseCase = new UserRegisterUseCase(this.repo)
+    const userEmailServices = new UserEmailServices()
+    const userUtils = new UserUtils()
+    const userRegisterUseCase = new UserRegisterUseCase(this.repo, userUtils, userEmailServices)
     const registerRoute = makeRegisterController(userRegisterUseCase)
     this.globalRouer.addApi(registerRoute)
   }
